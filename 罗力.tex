@@ -181,6 +181,16 @@ BoldFont=ProGB18030 DemiBold.otf,
         \item \textbf{平台适配：} 参与拼多多、淘宝、抖音电商等异构API拉取器的搭建与维护
     \end{itemize}
 
+    \item \textbf{技术选型与架构决策：}
+    \begin{itemize}
+        \item \textbf{Kotlin：} 公司原有Java技术栈基础上，选择Kotlin以获得更高性能，同时保持与Java模块的良好兼容性
+        \item \textbf{Quarkus：} 采用Quarkus框架支持GraalVM原生编译，显著提升启动速度与运行效率，适合高频API代理场景
+        \item \textbf{Redis：} 作为一级缓存，内存存储提供极高读写性能，满足订单状态查询的低延迟需求
+        \item \textbf{PostgreSQL：} % 选型原因待向mentor确认（如：ACID特性强、JSON支持好等）
+        \item \textbf{OpenAPI Generator：} 自动生成与各电商平台API对接的客户端代码，减少手动编写工作量，降低人为错误
+        \item \textbf{架构设计：} Controller-Service-Fetcher-Repository分层架构，清晰分离关注点，便于维护与扩展
+    \end{itemize}
+
     \item \textbf{量化成果与性能指标（待补充具体数字）：}
     \begin{itemize}
         \item API调用成本降低：[待补充]\%（相比直接调用上游API）
@@ -188,6 +198,16 @@ BoldFont=ProGB18030 DemiBold.otf,
         \item 平均响应时间：[待补充]ms（缓存命中情况下）
         \item 系统吞吐量：[待补充]QPS / 日均处理订单数：[待补充]
         \item 数据一致性：缓存过期时间低于拉取间隔，确保读取不到过期数据
+    \end{itemize}
+
+    \item \textbf{技术选型与架构决策：}
+    \begin{itemize}
+        \item \textbf{Kotlin：} 公司原有Java技术栈基础上，选择Kotlin以获得更高性能，同时保持与Java模块的良好兼容性
+        \item \textbf{Quarkus：} 采用Quarkus框架支持GraalVM原生编译，显著提升启动速度与运行效率，适合高频API代理场景
+        \item \textbf{Redis：} 作为一级缓存，内存存储提供极高读写性能，满足订单状态查询的低延迟需求
+        \item \textbf{PostgreSQL：} % 选型原因待向mentor确认（如：ACID特性强、JSON支持好等）
+        \item \textbf{OpenAPI Generator：} 自动生成与各电商平台API对接的客户端代码，减少手动编写工作量，降低人为错误
+        \item \textbf{架构设计：} Controller-Service-Fetcher-Repository分层架构，清晰分离关注点，便于维护与扩展
     \end{itemize}
 
     \item \textbf{技术栈：} Kotlin, Quarkus, Redis, PostgreSQL, OpenAPI Generator, 多平台电商API
