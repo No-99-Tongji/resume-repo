@@ -1,0 +1,281 @@
+%%原模板参考了https://www.wondercv.com/的模板 说老实话 超级简历真比overleaf好用  就像低代码平台一样   但是overleaf使用latex语法支持更好的扩展性
+\documentclass[11pt]{article}
+% disable indent globally
+\setlength{\parindent}{0pt}
+% some general improvements, defines the XeTeX logo
+\usepackage{xltxtra}
+\usepackage{bookmark}
+% use hyperlink for email and url
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\usepackage{url}
+\urlstyle{tt}
+\usepackage{multicol}
+\usepackage{xcolor}
+%%%% 统一一种颜色，偏蓝色，用于section下划线和fontawesome
+\definecolor{CVBlue}{RGB}{078,164,239 }
+%   RGB值   可以关注微信公众号 阿昆的科研日常   那里有很多配色 我列一下我这个二次元喜欢的配色 (R G  B )   其他可以去看配色方案下面的文件
+% 胡桃红    201 071  055  
+% 芙芙蓝    078,164,239 
+% 宵宫红    205 068  050
+% 甘雨蓝    196 216  242
+% 流萤绿    059 165  149 
+% 电兵蓝   我才不找呢   哼哼哼
+
+
+
+
+%照片   标准一寸白底照片   找照相馆拍   拍的好看一点    192*240 
+%  姓名   作为简历开头大标题
+%  给出学校标识   
+% 给出充足的联系方式 
+% 给出博客地址   base   很快入职 + 干半年
+
+\usepackage{calc}
+%%%% 利用tikz来定位照片和学校Logo 
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+% loading fonts
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\CJKsetecglue{}
+%% 取消中文与数字之间间隙
+%%%%% 字体需要自己下载安装，注意版权问题。
+% 这两种字体应该比较好看，英文Helvetica，中文方正兰亭黑，也是有多种版本，自己试试哪些好看。参考了https://www.wondercv.com/的模板
+%%%%% windows系统好像需要先安装字体，之后下面语句就够了
+%Main document font
+%\setmainfont[
+%  BoldFont = HelveticaNeueLTPro-Md.otf ,
+%]{HelveticaNeueLTPro-Roman.otf}
+%
+%\setCJKmainfont[
+%BoldFont=Pro_GB18030 DemiBold.otf,
+%]{Pro_GB18030.otf}
+%%%%% 字体需要自己下载安装，注意版权问题
+%%%%% linux系统只需要字体路径就行了，如下
+% % Main document font
+
+\setmainfont[
+Path = Font/,
+  Extension = .otf ,
+  BoldFont = HelveticaNeueLTPro-Md.otf ,
+]{HelveticaNeueLTPro-Roman.otf}
+\setCJKmainfont[
+Path = Font/,
+  Extension = .otf ,
+BoldFont=ProGB18030 DemiBold.otf,
+]{ProGB18030.otf}
+
+
+\usepackage{relsize}
+\usepackage{xspace}
+\protected\def\Cpp{{C\nolinebreak[4]\hspace{-.05em}\raisebox{.28ex}{\relsize{-1}++}}\xspace} 
+% use fontawesome
+\usepackage{fontawesome}
+%\newfontfamily{\FA}{[FontAwesome.otf]}
+\usepackage[
+	a4paper,
+	left=1.2cm,
+	right=1.2cm,
+	top=1.5cm,
+	bottom=1cm,
+	nohead
+]{geometry}
+\renewcommand{\baselinestretch}{1.2} 
+%定义行间距1.2
+\usepackage{titlesec}
+\usepackage{enumitem}
+\setlist{noitemsep}
+
+% removes spacing from items but leaves space around the whole list
+%\setlist{nosep} % removes all vertical spacing within and around the list
+\setlist[itemize]{topsep=0.25em, leftmargin=*}
+\setlist[enumerate]{topsep=0.25em, leftmargin=*}
+\titleformat{\section}        
+% Customise the \section command 
+  {\large\bfseries\raggedright} 
+  % Make the \section headers large (\Large), % small capitals (\scshape) and left aligned (\raggedright)
+  {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
+  {}                           % Can be used to insert code before the heading
+  [{\color{CVBlue}\titlerule}]                 % Inserts a horizontal line after the heading
+\titlespacing*{\section}{0cm}{*1.6}{*1.2}
+\usepackage{siunitx}
+\usepackage{amssymb}
+%\xeCJKsetup{CJKspace=true}
+%\xeCJKDeclareCharClass{CJK}{`0 -> `9}    % 设置 0-9 以 CJK 字体输出
+%\normalspacedchars{0,1,2,3,4,5,6,7,8,9} % 0-9 的字符类被还原
+
+
+\begin{document}
+
+\pagenumbering{gobble} 
+%%%% 利用tikz来定位照片，标准一寸照片  192*240     985   
+% \begin{tikzpicture}[remember picture, overlay]
+% 	\node[anchor = north east] at ($(current page.north east)+(-1cm,-1.2cm)$) {\includegraphics[height=2.8cm]{img/myavator.jpg}};
+% \end{tikzpicture}%
+%%%% 利用tikz来定位学校Logo，这里只在第一页显示，345 × 77 mm 
+\begin{tikzpicture}[remember picture, overlay]
+	\node[anchor = north west] at ($(current page.north west)+(0.2cm,-0.2cm)$) {\includegraphics[height=2.5cm]{img/tongji.png}};
+\end{tikzpicture}%
+%%%% 利用tikz来定位页脚栏，电子版简历使用，黑白纸质打印效果可能并不好。这里只在第一页显示，如果需要每页都有，页脚或者background中加入。
+% \begin{tikzpicture}[remember picture, overlay] 
+%     \node[anchor = south,fill=CVBlue,draw=none,minimum width=\paperwidth,minimum height=1.5em,align=center,font=\footnotesize,text=white] at ($(current page.south)$) 
+%     {\faGithubAlt \ \href{}{https://www.yuque.com/爱玩原神的可莉/}\qquad
+%         \faRssSquare \ \href{github地址}{https://github.com/AHUA-Official} };
+%         % 围栏填上自己的博客地址 
+% \end{tikzpicture}
+
+%tikzpicture环境很敏感，注释周围的空格、空行都会引起水平距离或垂直距离的变化，
+%
+\centerline{\LARGE\bfseries{罗力}}
+
+% 联系信息+个人博客+求职优势(就是稳定干半年+入职快)
+% 邮箱最好用你的edu邮箱   但是其实用qq也行  主要是要收到邮件查看响应的速度要快
+\centerline{\normalsize{
+		\faPhone \ 18228979484 \quad
+		\faEnvelopeO \ \href{mailto:mxd@mail.bnu.edu.cn}{3167937401@qq.com}}}
+
+\centerline{\normalsize{wx：ll18228979484 \quad base：上海 \quad github : https://github.com/No-99-Tongji }}
+% 把你github地址写上去  
+% \centerline{\normalsize{可连续实习6个月以上 \quad 两周内到岗}}
+\centerline{\normalsize{可连续实习6个月以上}}
+
+
+
+
+
+
+
+% 教育背景
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\  教育背景}
+\textbf{同济大学 \quad 软件工程 }           \hfill             2023年9月-2027年6月
+% \newline {CET6}
+
+% 我这个地方写太空了好像  
+
+% % 实习经历   这个真的要好好写
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faUsers}\ 实习经历}
+\textbf{上海乐言科技股份有限公司 \hfill 后端开发实习生 \hfill 2026.1--至今}
+\begin{itemize}
+    \item \textbf{项目：} Hamilton系统 - 电商平台统一API代理与智能缓存系统
+    \begin{itemize}
+        \item \textbf{项目背景：} 统一对接抖音、淘宝、京东、拼多多等主流电商平台API，解决高频订单查询与API按次付费成本高的矛盾
+        \item \textbf{核心目标：} 设计智能缓存系统，降低API调用成本，保障数据时效性
+    \end{itemize}
+
+    \item \textbf{技术方案设计（与mentor共同讨论确定）：}
+    \begin{itemize}
+        \item \textbf{懒加载：} 下游请求触发更新，避免创建订单时的冗余API调用
+        \item \textbf{分级缓存：} Redis（一级缓存）+ PostgreSQL（二级持久化），为下游提供高效查询服务
+        \item \textbf{定期更新：} Quarkus定时任务每秒扫描需更新订单（比较Last\_pulled\_at字段），批量拉取最新状态
+        \item \textbf{定点更新：} 下游检测缓存过期时，触发单个订单实时更新% 检测机制待完善
+    \end{itemize}
+
+    \item \textbf{技术实现细节：}
+    \begin{itemize}
+        \item \textbf{缓存过期检测：} % 方案1: 基于时间戳比较；方案2: 主动失效通知（由Claude生成，需确认）
+        \item \textbf{Redis缓存策略：} 使用order\_id作为单key；各平台独立数据库与容器，确保数据隔离% 设计原因待向mentor确认
+        \item \textbf{数据库设计：} 在seller\_id和last\_pulled\_at字段建立索引，优化批量查询性能
+        \item \textbf{系统架构：} 采用Controller-Service-Fetcher-Repository分层架构
+        \item \textbf{平台适配：} 参与拼多多、淘宝、抖音电商等异构API拉取器的搭建与维护
+    \end{itemize}
+
+    \item \textbf{量化成果与性能指标（待补充具体数字）：}
+    \begin{itemize}
+        \item API调用成本降低：[待补充]\%（相比直接调用上游API）
+        \item Redis缓存命中率：[待补充]\%（一级缓存直接响应比例）
+        \item 平均响应时间：[待补充]ms（缓存命中情况下）
+        \item 系统吞吐量：[待补充]QPS / 日均处理订单数：[待补充]
+        \item 数据一致性：缓存过期时间低于拉取间隔，确保读取不到过期数据
+    \end{itemize}
+
+    \item \textbf{技术栈：} Kotlin, Quarkus, Redis, PostgreSQL, OpenAPI Generator, 多平台电商API
+\end{itemize}
+
+
+% 项目经历   这个真的要好好写
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faUsers}\ 项目经历}
+\textbf{EduNexus 学习管理系统 \hfill 组长/全栈开发 \hfill 2025.10--2025.12}
+\begin{itemize}
+    \item \textbf{团队与角色：} 3人全栈开发团队组长，负责技术选型、核心模块开发、团队协调与Scrum敏捷开发管理
+
+    \item \textbf{技术选型与架构决策：}
+    \begin{itemize}
+        \item \textbf{前端：} Vue.js + Element Plus（国内教程丰富、组件库完善）
+        \item \textbf{后端：} SpringBoot（生态成熟、易于集成开源模块）+ FastAPI（AI Agent模块轻量化）
+        \item \textbf{数据库：} MySQL（团队熟悉、命令简洁）
+        \item \textbf{架构：} 微服务架构（模块解耦、独立部署、故障隔离）
+    \end{itemize}
+
+    \item \textbf{核心模块与职责：}
+    \begin{itemize}
+        \item \textbf{课程模块：} 课程CRUD、分类管理、进度跟踪
+        \item \textbf{作业模块：} 作业发布、提交、批改、成绩管理
+        \item \textbf{用户模块：} 多角色（学生/教师/管理员）认证授权
+        \item \textbf{AI Agent模块：} 基于FastAPI构建智能问答服务，采用检索增强生成（RAG）架构
+        \begin{itemize}
+            \item \textbf{AI模型集成：} 调用OpenAI GPT-3.5 API实现自然语言处理% 可根据实际情况调整模型名称
+            \item \textbf{知识检索：} 设计向量化检索系统，从课程、作业、通知等数据中提取相关上下文
+            \item \textbf{Prompt工程：} 设计多层prompt模板，包含系统角色指令、检索上下文、对话历史、用户问题
+            \item \textbf{上下文管理：} 实现对话状态维护，控制上下文窗口长度，保证多轮对话连贯性
+            \item \textbf{错误处理：} 实现API调用重试、超时降级、异常回复等容错机制
+            \item \textbf{性能优化：} 使用Redis缓存高频问题和标准答案，减少API调用成本与响应延迟
+        \end{itemize}
+    \end{itemize}
+
+    \item \textbf{系统架构与部署：}
+    \begin{itemize}
+        \item 微服务拆分部署于4台服务器分布式系统
+        \item Docker容器化部署，Nginx负载均衡与反向代理
+        \item Nacos服务注册与发现，Jenkins CI/CD自动化流水线
+        \item Redis缓存常用查询数据，提升系统响应速度
+    \end{itemize}
+
+    \item \textbf{开发流程：} 采用Scrum敏捷开发，定期冲刺规划、每日站会、代码审查
+\end{itemize}
+
+
+
+
+% 专业技能   这个真的要好好写  
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faWrench}\ 专业技能}
+
+	% \item 数据库
+	% \item Linux
+ %    \item shell
+	% \item Java
+	% \item Redis
+ %    \item 常用框架
+ %    \item 计算机网络 
+ %    \item 虚拟化： 
+ %    \item 团队协作
+ %    \item 还有啥 
+\begin{itemize}
+    \item \textbf{数据库：} 熟悉MySQL索引原理，事务隔离级别和ACID实现机制，共享锁和排他锁机制。了解Redis底层数据结构和分布式策略。
+    \item \textbf{Web框架：} 熟悉SpringBoot/MyBatis/Maven等Java开发框架的使用，了解IOC原理和AOP编程范式。
+    \item \textbf{开发工具：} 熟悉Git工作流，熟悉使用JetBrain/VScode等IDE。
+    \item \textbf{计算机网络：} 了解HTTP/TCP/IP/RPC等协议内容，动手实现过TCP和RPC协议客户端和服务端，了解DNS/ARP/
+    DHCP/NAT等技术原理。
+    \item \textbf{虚拟化：} 了解docker和docker compose的基本使用
+
+\end{itemize}
+
+
+
+
+% 其他亮点 
+\section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faTags}\ 其他} 
+% increase linespacing [parsep=0.5ex]
+\begin{itemize}
+    % \item 对软件设计模式感兴趣，已有仓库用Java实现了23种设计模式的样例代码。
+    \item 对操作系统感兴趣，完成了MIT S6.081(xv6)操作系统Labs。
+\end{itemize}
+
+ 
+
+
+
+%%%% 如果多页简历，可以手动在适当位置插入 \newpage 或者 \clearpage 开始新一页
+
+\end{document}
