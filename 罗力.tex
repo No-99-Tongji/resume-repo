@@ -164,7 +164,7 @@ BoldFont=ProGB18030 DemiBold.otf,
         \item \textbf{核心目标：} 设计智能缓存系统，降低API调用成本，保障数据时效性
     \end{itemize}
 
-    \item \textbf{技术方案设计（与mentor共同讨论确定）：}
+    \item \textbf{技术方案设计：}
     \begin{itemize}
         \item \textbf{懒加载：} 下游请求触发更新，避免创建订单时的冗余API调用
         \item \textbf{分级缓存：} Redis（一级缓存）+ PostgreSQL（二级持久化），为下游提供高效查询服务
