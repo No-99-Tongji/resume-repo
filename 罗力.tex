@@ -174,7 +174,6 @@ BoldFont=ProGB18030 DemiBold.otf,
 
     \item \textbf{技术实现细节：}
     \begin{itemize}
-        \item \textbf{缓存过期检测：} % 方案1: 基于时间戳比较；方案2: 主动失效通知（由Claude生成，需确认）
         \item \textbf{Redis缓存策略：} 使用order\_id作为单key；各平台独立数据库与容器，确保数据隔离% 设计原因待向mentor确认
         \item \textbf{数据库设计：} 在seller\_id和last\_pulled\_at字段建立索引，优化批量查询性能
         \item \textbf{系统架构：} 采用Controller-Service-Fetcher-Repository分层架构
@@ -186,31 +185,11 @@ BoldFont=ProGB18030 DemiBold.otf,
         \item \textbf{Kotlin：} 公司原有Java技术栈基础上，选择Kotlin以获得更高性能，同时保持与Java模块的良好兼容性
         \item \textbf{Quarkus：} 采用Quarkus框架支持GraalVM原生编译，显著提升启动速度与运行效率，适合高频API代理场景
         \item \textbf{Redis：} 作为一级缓存，内存存储提供极高读写性能，满足订单状态查询的低延迟需求
-        \item \textbf{PostgreSQL：} % 选型原因待向mentor确认（如：ACID特性强、JSON支持好等）
         \item \textbf{OpenAPI Generator：} 自动生成与各电商平台API对接的客户端代码，减少手动编写工作量，降低人为错误
-        \item \textbf{架构设计：} Controller-Service-Fetcher-Repository分层架构，清晰分离关注点，便于维护与扩展
+        \item \textbf{架构设计：} Controller-Service-Fetcher-Model分层架构，清晰分离关注点，便于维护与扩展
     \end{itemize}
 
-    \item \textbf{量化成果与性能指标（待补充具体数字）：}
-    \begin{itemize}
-        \item API调用成本降低：[待补充]\%（相比直接调用上游API）
-        \item Redis缓存命中率：[待补充]\%（一级缓存直接响应比例）
-        \item 平均响应时间：[待补充]ms（缓存命中情况下）
-        \item 系统吞吐量：[待补充]QPS / 日均处理订单数：[待补充]
-        \item 数据一致性：缓存过期时间低于拉取间隔，确保读取不到过期数据
-    \end{itemize}
-
-    \item \textbf{技术选型与架构决策：}
-    \begin{itemize}
-        \item \textbf{Kotlin：} 公司原有Java技术栈基础上，选择Kotlin以获得更高性能，同时保持与Java模块的良好兼容性
-        \item \textbf{Quarkus：} 采用Quarkus框架支持GraalVM原生编译，显著提升启动速度与运行效率，适合高频API代理场景
-        \item \textbf{Redis：} 作为一级缓存，内存存储提供极高读写性能，满足订单状态查询的低延迟需求
-        \item \textbf{PostgreSQL：} % 选型原因待向mentor确认（如：ACID特性强、JSON支持好等）
-        \item \textbf{OpenAPI Generator：} 自动生成与各电商平台API对接的客户端代码，减少手动编写工作量，降低人为错误
-        \item \textbf{架构设计：} Controller-Service-Fetcher-Repository分层架构，清晰分离关注点，便于维护与扩展
-    \end{itemize}
-
-    \item \textbf{技术栈：} Kotlin, Quarkus, Redis, PostgreSQL, OpenAPI Generator, 多平台电商API
+    \item \textbf{技术栈：} Kotlin, Quarkus, Redis, PostgreSQL, OpenAPI Generator
 \end{itemize}
 
 
@@ -234,14 +213,6 @@ BoldFont=ProGB18030 DemiBold.otf,
         \item \textbf{作业模块：} 作业发布、提交、批改、成绩管理
         \item \textbf{用户模块：} 多角色（学生/教师/管理员）认证授权
         \item \textbf{AI Agent模块：} 基于FastAPI构建智能问答服务，采用检索增强生成（RAG）架构
-        \begin{itemize}
-            \item \textbf{AI模型集成：} 调用OpenAI GPT-3.5 API实现自然语言处理% 可根据实际情况调整模型名称
-            \item \textbf{知识检索：} 设计向量化检索系统，从课程、作业、通知等数据中提取相关上下文
-            \item \textbf{Prompt工程：} 设计多层prompt模板，包含系统角色指令、检索上下文、对话历史、用户问题
-            \item \textbf{上下文管理：} 实现对话状态维护，控制上下文窗口长度，保证多轮对话连贯性
-            \item \textbf{错误处理：} 实现API调用重试、超时降级、异常回复等容错机制
-            \item \textbf{性能优化：} 使用Redis缓存高频问题和标准答案，减少API调用成本与响应延迟
-        \end{itemize}
     \end{itemize}
 
     \item \textbf{系统架构与部署：}
