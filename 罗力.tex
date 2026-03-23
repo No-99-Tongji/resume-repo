@@ -136,20 +136,13 @@ BoldFont=ProGB18030 DemiBold.otf,
 		\faPhone \ 18228979484 \quad
 		\faEnvelopeO \ \href{mailto:mxd@mail.bnu.edu.cn}{3167937401@qq.com}}}
 
-\centerline{\normalsize{wx：ll18228979484 \quad base：上海 \quad github : https://github.com/No-99-Tongji }}
+\centerline{\normalsize{wx：ll18228979484 \quad github : https://github.com/No-99-Tongji }}
 % 把你github地址写上去  
-% \centerline{\normalsize{可连续实习6个月以上 \quad 两周内到岗}}
-\centerline{\normalsize{可连续实习6个月以上}}
-
-
-
-
-
-
 
 % 教育背景
 \section{\makebox[\widthof{\faGraduationCap}][c]{\color{CVBlue}\faGraduationCap}\  教育背景}
-\textbf{同济大学 \quad 软件工程 }           \hfill             2023年9月-2027年6月
+\textbf{同济大学 \quad 软件工程 } \hfill 2023年9月-2027年6月 \\
+平均绩点：4.54/5.0，专业排名前25\%，曾获校级二等奖学金，学习成绩优异。
 % \newline {CET6}
 
 % 我这个地方写太空了好像  
@@ -164,19 +157,18 @@ BoldFont=ProGB18030 DemiBold.otf,
         \item \textbf{核心目标：} 设计智能缓存系统，降低API调用成本，保障数据时效性
     \end{itemize}
 
-    \item \textbf{技术方案设计：}
+    \item \textbf{技术方案：}
     \begin{itemize}
-        \item \textbf{懒加载：} 下游请求触发更新，避免创建订单时的冗余API调用
-        \item \textbf{分级缓存：} Redis（一级缓存）+ PostgreSQL（二级持久化），为下游提供高效查询服务
-        \item \textbf{定期更新：} Quarkus定时任务每秒扫描需更新订单（比较Last\_pulled\_at字段），批量拉取最新状态
-        \item \textbf{定点更新：} 下游检测缓存过期时，触发单个订单实时更新% 检测机制待完善
+        \item \textbf{懒加载：} 上游请求触发更新，避免创建订单时的冗余API调用
+        \item \textbf{缓存：} PostgreSQL持久化订单数据，为上游提供高效查询服务
+        \item \textbf{定期更新：} Quarkus定时任务每秒扫描需更新订单（比较Last\_pulled\_at, seller\_id等字段），批量拉取最新状态
+        \item \textbf{定点更新：} 上游检测缓存过期时，触发单个订单实时更新% 检测机制待完善
     \end{itemize}
 
     \item \textbf{技术实现细节：}
     \begin{itemize}
-        \item \textbf{Redis缓存策略：} 使用order\_id作为单key；各平台独立数据库与容器，确保数据隔离% 设计原因待向mentor确认
         \item \textbf{数据库设计：} 在seller\_id和last\_pulled\_at字段建立索引，优化批量查询性能
-        \item \textbf{系统架构：} 采用Controller-Service-Fetcher-Repository分层架构
+        \item \textbf{系统架构：} 采用Controller-Service-Fetcher-Model分层架构
         \item \textbf{平台适配：} 参与拼多多、淘宝、抖音电商等异构API拉取器的搭建与维护
     \end{itemize}
 
@@ -184,12 +176,11 @@ BoldFont=ProGB18030 DemiBold.otf,
     \begin{itemize}
         \item \textbf{Kotlin：} 公司原有Java技术栈基础上，选择Kotlin以获得更高性能，同时保持与Java模块的良好兼容性
         \item \textbf{Quarkus：} 采用Quarkus框架支持GraalVM原生编译，显著提升启动速度与运行效率，适合高频API代理场景
-        \item \textbf{Redis：} 作为一级缓存，内存存储提供极高读写性能，满足订单状态查询的低延迟需求
         \item \textbf{OpenAPI Generator：} 自动生成与各电商平台API对接的客户端代码，减少手动编写工作量，降低人为错误
         \item \textbf{架构设计：} Controller-Service-Fetcher-Model分层架构，清晰分离关注点，便于维护与扩展
     \end{itemize}
 
-    \item \textbf{技术栈：} Kotlin, Quarkus, Redis, PostgreSQL, OpenAPI Generator
+    \item \textbf{技术栈：} Kotlin, Quarkus, PostgreSQL, OpenAPI Generator
 \end{itemize}
 
 
