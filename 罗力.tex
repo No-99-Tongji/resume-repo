@@ -161,7 +161,11 @@ BoldFont=ProGB18030 DemiBold.otf,
     \begin{itemize}
         \item \textbf{懒加载：} 上游请求触发更新，避免创建订单时的冗余API调用
         \item \textbf{缓存：} PostgreSQL持久化订单数据，为上游提供高效查询服务
-        \item \textbf{定期更新：} Quarkus定时任务每秒扫描需更新订单（比较Last\_pulled\_at, seller\_id等字段），批量拉取最新状态
+        \item \textbf{定期更新：} Quarkus定时任务每秒扫描需更新店铺（查找last\_pulled\_at字段早于当前时间-阈值（如10分钟）的店铺），批量拉取这些店铺订单的最新状态
+            \begin{itemize}
+                \item \textbf{拉取间隙优化：} 10分钟间隙平衡时效性与成本：间隙太短导致冗余拉取（无状态更新），太长则时效性差；基于订单状态变化波峰分析（波峰集中在10分钟内和一天外），一天外波峰可被批量拉取覆盖，10分钟内波峰因拉取成本考虑不做高频更新
+                \item \textbf{成本效益：} 通过优化拉取间隙，使API调用成本降至原来的20\%（成本公式：单次API调用成本 $\times$ QPS）
+            \end{itemize}
         \item \textbf{定点更新：} 上游检测缓存过期时，触发单个订单实时更新% 检测机制待完善
     \end{itemize}
 
